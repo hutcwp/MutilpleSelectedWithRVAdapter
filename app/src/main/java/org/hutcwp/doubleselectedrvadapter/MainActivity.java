@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private ItemAdapter itemAdapter;
     private List<Item> itemList;
 
+    //该Button用来实现清除所有已选状态的方法
     private Button btnClear;
 
     @Override
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //模拟生成数据
         addData();
 
+        //通过实现抽象方法，来达到Button根据当前状态（多选模式下显示，普通模式不显示）决定是否显示
         itemAdapter = new ItemAdapter(itemList, MainActivity.this) {
             @Override
             public void setNormalMode() {
@@ -61,23 +63,19 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        //设置点击事件和长按事件的接口
         itemAdapter.setOnItemClickListener(new ItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 //改变选择状态
                 itemAdapter.changeSelectStatus(position);
-                //调试方法
-                itemAdapter.printStatu();
             }
 
             @Override
             public void onItemLongClick(View view, int position) {
-                if (itemAdapter.curState == itemAdapter.NORMAL_STATE) {
-                    //如果当前状态是普通状态
-                    itemAdapter.setMode(itemAdapter.MULTIPLE_STATE);
-                }
-                //调试方法
-                itemAdapter.printStatu();
+                //如果当前状态是普通状态
+                itemAdapter.setMode(itemAdapter.MULTIPLE_STATE);
+
             }
         });
 
