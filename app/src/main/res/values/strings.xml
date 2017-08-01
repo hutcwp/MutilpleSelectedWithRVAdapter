@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">DoubleSelectedRVAdapter</string>
+    <string name="item">item</string>
+    <string name="tip">多选状态</string>
+    <string name="clear_selected_status">清除所有已选状态</string>
+</resources>
